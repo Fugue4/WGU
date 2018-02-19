@@ -1,30 +1,33 @@
 package com.example.peterlanier.wgu;
-
-import java.util.ArrayList;
 import java.util.Date;
+
 
 /**
  * Created by peterlanier on 2/17/18.
  */
 
 class Term {
-    public String title;
-    public Date start;
-    public Date end;
-    private static ArrayList<Term> Terms;
+    public static String title;
+    public static Date start;
+    public static Date end;
 
-    public Term(String term, Date start, Date end) {
-        this.title = term;
-        this.start = start;
-        this.end = end;
+    public Term(String title) {
+        this.title = title;
     }
 
-    public String getTerm() {
+    public Term(String title, Date start, Date end) {
+        this.title = title;
+        this.start = start;
+        this.end = end;
+
+    }
+
+    public String getTitle() {
         return title;
     }
 
-    public void setTerm(String term) {
-        this.title = term;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getStart() {
@@ -43,11 +46,5 @@ class Term {
         this.end = end;
     }
 
-    public static ArrayList<Term> getTerms() {
-        return Terms;
-    }
 
-    public void addTerm(Term term) {
-        addTerm(term);
-    }
 }

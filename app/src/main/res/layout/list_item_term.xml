@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:layout_centerVertical="true"
+    android:id="@+id/term_list_text_layout">
+
+
+    <TextView
+        android:id="@+id/term_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="18sp"
+        tools:text="Title"
+        />
+
+    <TextView
+        android:id="@+id/term_list_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/term_list_title"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="16sp"
+        tools:text="Start" />
+
+    <TextView
+        android:id="@+id/term_list_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/term_list_start"
+        android:layout_alignBottom="@+id/term_list_start"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/term_list_start"
+        android:layout_toRightOf="@+id/term_list_start"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="16sp"
+        tools:text="End" />
+</RelativeLayout>
