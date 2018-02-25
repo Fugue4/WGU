@@ -7,9 +7,9 @@ import java.util.Date;
  */
 
 class Term {
-    public static String title;
-    public static Date start;
-    public static Date end;
+    String title;
+    Date start;
+    Date end;
 
     public Term(String title) {
         this.title = title;
