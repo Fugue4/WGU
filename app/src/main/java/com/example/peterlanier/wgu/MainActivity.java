@@ -1,20 +1,24 @@
 package com.example.peterlanier.wgu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
 
+    //Create Sample Data
     Term t1 = new Term("Spring Term 2001", new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2001"), new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001)"));
     Term t2 = new Term("Fall Term 2001", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001"), new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2001)"));
     Term t3 = new Term("Spring Term 2002", new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2002"), new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002)"));
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.terms_list_view);
 
 
-        //load objects to array
+        //Load Sample Data
         final ArrayList<Term> termList = new ArrayList<>();
         termList.add(t1);
         termList.add(t2);
@@ -42,21 +46,19 @@ public class MainActivity extends AppCompatActivity {
         TermAdapter adapter = new TermAdapter(this, termList);
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
 
-//        String[] listTerms = new String[termList.size()];
-//
-//        //place objects into string
-//        for(int i=0; i < termList.size(); i++){
-//            Term term = termList.get(i);
-//            listTerms[i] = term.title;
-//        }
-//
-//
-//        ArrayAdapter<String> termsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listTerms);
-//
-//        listView = (ListView) findViewById(R.id.terms_list_view);
-//        listView.setAdapter(termsAdapter);
+                Intent myIntent = new Intent(view.getContext(), DetailTerm.class);
+                startActivityForResult(myIntent, 0);
+
+            }
+        });
+
     }
+
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
 

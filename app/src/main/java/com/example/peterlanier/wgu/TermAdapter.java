@@ -61,9 +61,9 @@ public class TermAdapter extends BaseAdapter {
         Term term = (Term) getItem(position);
 
 
-        titleTextView.setText(Term.title);
-        startTextView.setText(df.format(Term.start));
-        endTextView.setText(df.format(Term.end));
+        titleTextView.setText(term.title);
+        startTextView.setText(df.format(term.start));
+        endTextView.setText(df.format(term.end));
 
 
         return rowView;
