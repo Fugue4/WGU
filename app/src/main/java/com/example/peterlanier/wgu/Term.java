@@ -1,4 +1,5 @@
 package com.example.peterlanier.wgu;
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -6,7 +7,7 @@ import java.util.Date;
  * Created by peterlanier on 2/17/18.
  */
 
-class Term {
+public class Term implements Serializable {
     String title;
     Date start;
     Date end;

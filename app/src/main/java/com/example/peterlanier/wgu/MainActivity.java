@@ -25,9 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Term t4 = new Term("Fall Term 2002", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002"), new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2002)"));
 
     public MainActivity() throws ParseException {
-
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +33,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.terms_list_view);
 
-
-        //Load Sample Data
         final ArrayList<Term> termList = new ArrayList<>();
+        //Load Sample Data
         termList.add(t1);
         termList.add(t2);
         termList.add(t3);
         termList.add(t4);
 
-        TermAdapter adapter = new TermAdapter(this, termList);
+        final TermAdapter adapter = new TermAdapter(this, termList);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
-                Intent myIntent = new Intent(view.getContext(), DetailTerm.class);
-                startActivityForResult(myIntent, 0);
+
+                    Term currentTerm = (Term) parent.getItemAtPosition(position);
+
+                    Intent i = new Intent(MainActivity.this, DetailTerm.class);
+                    Bundle b = new Bundle();
+                    b.putSerializable("CURRENT_TERM", currentTerm);
+                    i.putExtras(b);
+                    startActivityForResult(i, 0);
 
             }
         });
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        System.out.println(t1);
+
         switch (item.getItemId()) {
             case R.id.navigation_terms:
                 System.out.println("navigated to terms");
