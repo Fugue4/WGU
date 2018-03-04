@@ -2,7 +2,6 @@ package com.example.peterlanier.wgu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +26,10 @@ public class DetailTerm extends AppCompatActivity {
     Course c2 = new Course("Course 2", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
     Course c3 = new Course("Course 3", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002)"));
     Course c4 = new Course("Course 4", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
+    Course c5 = new Course("Course 5", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001)"));
+    Course c6 = new Course("Course 6", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
+    Course c7 = new Course("Course 7", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002)"));
+    Course c8 = new Course("Course 8", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
 
     public DetailTerm() throws ParseException {
     }
@@ -64,6 +67,10 @@ public class DetailTerm extends AppCompatActivity {
         courseList.add(c2);
         courseList.add(c3);
         courseList.add(c4);
+        courseList.add(c5);
+        courseList.add(c6);
+        courseList.add(c7);
+        courseList.add(c8);
 
         final CourseAdapter adapter = new CourseAdapter(this, courseList);
         listView.setAdapter(adapter);
@@ -85,19 +92,19 @@ public class DetailTerm extends AppCompatActivity {
         });
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        final Term editTerm = currentTerm;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(getBaseContext(), EditTerm.class);
-                Bundle b = new Bundle();
-                b.putSerializable("EDIT_TERM", editTerm);
-                i.putExtras(b);
-                startActivityForResult(i, 0);
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        final Term editTerm = currentTerm;
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(getBaseContext(), EditTerm.class);
+//                Bundle b = new Bundle();
+//                b.putSerializable("EDIT_TERM", editTerm);
+//                i.putExtras(b);
+//                startActivityForResult(i, 0);
+//            }
+//        });
 
 
 

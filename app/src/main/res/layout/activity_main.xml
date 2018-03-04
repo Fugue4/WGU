@@ -42,8 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:background="@android:color/holo_green_light"
-            android:text="@string/home_button" />
+            android:autoText="false"
+            android:background="@color/colorAccent"
+            android:text="@string/home_button"
+            android:textColor="@android:color/background_light" />
 
 
 </LinearLayout>

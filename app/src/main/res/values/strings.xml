@@ -4,10 +4,11 @@
 
     <!--Navigation Menu-->
     <string name="title_edit_term">Edit Term</string>
-    <string name="title_new_course">New Course</string>
+    <string name="title_new_course">+ New Course</string>
     <string name="title_edit_course">Edit Course</string>
-    <string name="title_new_assessment">New Assessment</string>
-
+    <string name="title_new_assessment">+ New Assessment</string>
+    <string name="title_edit_assessment">Edit Assessment</string>
+    <string name="title_new_term">+ New Term</string>
 
     <!--Home Screen-->
     <string name="home_header">Android App</string>

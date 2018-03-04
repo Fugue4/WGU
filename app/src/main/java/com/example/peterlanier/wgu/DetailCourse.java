@@ -87,7 +87,7 @@ public class DetailCourse extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.navigation_term, menu);
+        inflater.inflate(R.menu.navigation_course, menu);
         return true;
     }
 
