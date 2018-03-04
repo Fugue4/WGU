@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -99,4 +102,32 @@ public class DetailTerm extends AppCompatActivity {
 
 
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation_term, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+
+        switch (item.getItemId()) {
+            case R.id.navigation_edit_term:
+                System.out.println("edit_term");
+                return true;
+            case R.id.navigation_new_course:
+                System.out.println("new_course");
+                return true;
+            default:
+                System.out.println("I failed");
+                return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
+
 }

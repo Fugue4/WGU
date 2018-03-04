@@ -3,6 +3,9 @@ package com.example.peterlanier.wgu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -79,4 +82,31 @@ public class DetailCourse extends AppCompatActivity {
         });
 
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation_term, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+
+        switch (item.getItemId()) {
+            case R.id.navigation_edit_course:
+                System.out.println("edit_course");
+                return true;
+            case R.id.navigation_new_assessment:
+                System.out.println("new_assessment");
+                return true;
+            default:
+                System.out.println("I failed");
+                return super.onOptionsItemSelected(item);
+        }
+
+
+    }
+
 }

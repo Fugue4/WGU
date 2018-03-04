@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_edit_course"
+        android:title="@string/title_edit_course" />
+
+    <item
+        android:id="@+id/navigation_new_assessment"
+        android:title="@string/title_new_assessment" />
+
+</menu>
