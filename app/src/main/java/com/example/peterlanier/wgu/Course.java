@@ -17,15 +17,20 @@ public class Course implements Serializable {
     String mentorName;
     String mentorPhone;
     String mentorEmail;
+
+
+
     String note;
     //array of mentor email addresses
-
     int termId;
 
     public Course(String title, Date start, Date end) {
         this.title = title;
         this.start = start;
         this.end = end;
+        this.mentorName = null;
+        this.mentorPhone = null;
+        this.mentorEmail = null;
     }
 
     public int getId() {
@@ -74,6 +79,22 @@ public class Course implements Serializable {
 
     public void setMentorName(String mentorName) {
         this.mentorName = mentorName;
+    }
+
+    public String getMentorPhone() {
+        return mentorPhone;
+    }
+
+    public void setMentorPhone(String mentorPhone) {
+        this.mentorPhone = mentorPhone;
+    }
+
+    public String getMentorEmail() {
+        return mentorEmail;
+    }
+
+    public void setMentorEmail(String mentorEmail) {
+        this.mentorEmail = mentorEmail;
     }
 
     public int getTermId() {

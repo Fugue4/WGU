@@ -71,6 +71,9 @@ public class DetailTerm extends AppCompatActivity {
         courseList.add(c6);
         courseList.add(c7);
         courseList.add(c8);
+        c1.setMentorName("Joe Brown");
+        c1.setMentorPhone("(201) 584-9638");
+        c1.setMentorEmail("brown@wgu.edu");
 
         final CourseAdapter adapter = new CourseAdapter(this, courseList);
         listView.setAdapter(adapter);
