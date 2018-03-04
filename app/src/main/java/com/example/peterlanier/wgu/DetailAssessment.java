@@ -15,6 +15,7 @@ public class DetailAssessment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_assessment);
+        setTitle("Assessment Details");
 
         title = (TextView) findViewById(R.id.assessment_detail_title);
         due = (TextView) findViewById(R.id.assessment_detail_due);

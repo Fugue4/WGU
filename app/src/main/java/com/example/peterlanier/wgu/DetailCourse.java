@@ -34,6 +34,7 @@ public class DetailCourse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_course);
+        setTitle("Course Details");
 
         title = (TextView) findViewById(R.id.course_detail_title);
         start = (TextView) findViewById(R.id.course_detail_start);

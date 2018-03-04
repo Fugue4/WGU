@@ -10,7 +10,7 @@
 
 
     <!--Home Screen-->
-    <string name="home_header">WGU App</string>
+    <string name="home_header">Android App</string>
     <string name="home_subheader">Scheduler &amp; Progress Tracker</string>
     <string name="home_button">Get Started</string>
 
