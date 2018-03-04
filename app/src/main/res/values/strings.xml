@@ -4,4 +4,17 @@
     <string name="title_terms">Terms</string>
     <string name="title_courses">Courses</string>
     <string name="title_assessments">Assessments</string>
+    <string name="title_activity_edit_term">EditTerm</string>
+
+    <!--Home Screen-->
+    <string name="home_header">WGU App</string>
+    <string name="home_subheader">Scheduler &amp; Progress Tracker</string>
+    <string name="home_button">Get Started</string>
+
+    <!--List Item-->
+    <string name="start">Start:</string>
+    <string name="end">End:</string>
+    <string name="due">Due:</string>
+
+
 </resources>

@@ -18,13 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".DetailTerm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".EditTerm"
+            android:label="@string/title_activity_edit_term"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ListTerm" />
+        <activity android:name=".DetailCourse" />
+        <activity android:name=".DetailAssessment"></activity>
     </application>
 
 </manifest>

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_centerVertical="true"
-    android:id="@+id/term_list_text_layout">
-
+    android:id="@+id/course_list_text_layout">
 
     <TextView
-        android:id="@+id/term_list_title"
+        android:id="@+id/course_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -18,53 +17,53 @@ android:layout_height="match_parent"
         tools:text="Title" />
 
     <TextView
-        android:id="@+id/term_list_start_caption"
+        android:id="@+id/course_list_start_caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/term_list_title"
-        android:layout_alignStart="@+id/term_list_title"
-        android:layout_below="@+id/term_list_title"
+        android:layout_alignLeft="@+id/course_list_title"
+        android:layout_alignStart="@+id/course_list_title"
+        android:layout_below="@+id/course_list_title"
         android:text="@string/start"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
     <TextView
-        android:id="@+id/term_list_start"
+        android:id="@+id/course_list_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/term_list_start_caption"
-        android:layout_alignBottom="@+id/term_list_start_caption"
+        android:layout_alignBaseline="@+id/course_list_start_caption"
+        android:layout_alignBottom="@+id/course_list_start_caption"
         android:layout_marginLeft="3dp"
         android:layout_marginStart="3dp"
-        android:layout_toEndOf="@+id/term_list_start_caption"
-        android:layout_toRightOf="@+id/term_list_start_caption"
+        android:layout_toEndOf="@+id/course_list_start_caption"
+        android:layout_toRightOf="@+id/course_list_start_caption"
         android:ellipsize="end"
         android:maxLines="3"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         tools:text="Start" />
 
     <TextView
-        android:id="@+id/term_list_end_caption"
+        android:id="@+id/course_list_end_caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/term_list_start"
-        android:layout_alignBottom="@+id/term_list_start"
+        android:layout_alignBaseline="@+id/course_list_start"
+        android:layout_alignBottom="@+id/course_list_start"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
-        android:layout_toEndOf="@+id/term_list_start"
-        android:layout_toRightOf="@+id/term_list_start"
+        android:layout_toEndOf="@+id/course_list_start"
+        android:layout_toRightOf="@+id/course_list_start"
         android:text="@string/end"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
     <TextView
-        android:id="@+id/term_list_end"
+        android:id="@+id/course_list_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/term_list_end_caption"
-        android:layout_alignBottom="@+id/term_list_end_caption"
+        android:layout_alignBaseline="@+id/course_list_end_caption"
+        android:layout_alignBottom="@+id/course_list_end_caption"
         android:layout_marginLeft="3dp"
         android:layout_marginStart="3dp"
-        android:layout_toEndOf="@+id/term_list_end_caption"
-        android:layout_toRightOf="@+id/term_list_end_caption"
+        android:layout_toEndOf="@+id/course_list_end_caption"
+        android:layout_toRightOf="@+id/course_list_end_caption"
         android:ellipsize="end"
         android:maxLines="3"
         android:paddingBottom="10dp"

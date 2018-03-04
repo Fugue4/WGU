@@ -8,6 +8,8 @@ import java.util.Date;
  */
 
 public class Term implements Serializable {
+
+    int id;
     String title;
     Date start;
     Date end;
@@ -22,6 +24,10 @@ public class Term implements Serializable {
         this.end = end;
 
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getTitle() {
         return title;

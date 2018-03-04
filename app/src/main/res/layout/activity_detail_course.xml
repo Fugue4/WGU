@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/term_detail_title"
+            android:id="@+id/course_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -26,7 +26,7 @@
             tools:text="Title" />
 
         <TextView
-            android:id="@+id/term_detail_start"
+            android:id="@+id/course_detail_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -37,7 +37,7 @@
             tools:text="Start" />
 
         <TextView
-            android:id="@+id/term_detail_end"
+            android:id="@+id/course_detail_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -58,7 +58,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/courses_list_view"
+        android:id="@+id/assessments_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listheader="Courses" />
