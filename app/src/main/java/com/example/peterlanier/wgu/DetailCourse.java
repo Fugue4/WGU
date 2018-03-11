@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 public class DetailCourse extends AppCompatActivity {
 
+    private AppDatabase database;
+    private Assessment assessment;
     private TextView title;
     private TextView start;
     private TextView end;
@@ -24,10 +26,10 @@ public class DetailCourse extends AppCompatActivity {
     private TextView mentorEmail;
     private ListView listView;
 
-    Assessment a1 = new Assessment("Assessment 1", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001)"));
-    Assessment a2 = new Assessment("Assessment 2", new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2001)"));
-    Assessment a3 = new Assessment("Assessment 3", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002)"));
-    Assessment a4 = new Assessment("Assessment 4", new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2002)"));
+//    Assessment a1 = new Assessment("Assessment 1", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001)"));
+//    Assessment a2 = new Assessment("Assessment 2", new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2001)"));
+//    Assessment a3 = new Assessment("Assessment 3", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002)"));
+//    Assessment a4 = new Assessment("Assessment 4", new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2002)"));
 
     public DetailCourse() throws ParseException {
     }
@@ -37,6 +39,9 @@ public class DetailCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_course);
         setTitle("Course Details");
+
+        //Database
+        database = AppDatabase.getDatabase(getApplicationContext());
 
         title = (TextView) findViewById(R.id.course_detail_title);
         start = (TextView) findViewById(R.id.course_detail_start);
@@ -55,8 +60,8 @@ public class DetailCourse extends AppCompatActivity {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
             title.setText(currentCourse.title);
-            start.setText(df.format(currentCourse.start));
-            end.setText(df.format(currentCourse.end));
+            start.setText(currentCourse.start);
+            end.setText(currentCourse.end);
             mentor.setText(currentCourse.mentorName);
             mentorPhone.setText(currentCourse.mentorPhone);
             mentorEmail.setText(currentCourse.mentorEmail);
@@ -64,12 +69,19 @@ public class DetailCourse extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.assessments_list_view);
 
-        final ArrayList<Assessment> assessmentList = new ArrayList<>();
+//        final ArrayList<Assessment> assessmentList = new ArrayList<>();
         //Load Sample Data
-        assessmentList.add(a1);
-        assessmentList.add(a2);
-        assessmentList.add(a3);
-        assessmentList.add(a4);
+//        assessmentList.add(a1);
+//        assessmentList.add(a2);
+//        assessmentList.add(a3);
+//        assessmentList.add(a4);
+
+        database.assessmentDao().addAssessment(new Assessment(1, "Hello", "immediately", 2));
+//        database.courseDao().addCourse(new Course(3, "course3", "this point", "that point", 2));
+        System.out.println("Courses Added");
+
+        final ArrayList<Assessment> assessmentList = (ArrayList<Assessment>) database.assessmentDao().findAssessmentsForCourse(currentCourse.getId());
+
 
         final AssessmentAdapter adapter = new AssessmentAdapter(this, assessmentList);
         listView.setAdapter(adapter);

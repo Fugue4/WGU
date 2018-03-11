@@ -17,19 +17,21 @@ import java.util.ArrayList;
 
 public class DetailTerm extends AppCompatActivity {
 
+    private AppDatabase database;
+    private Course course;
     private TextView title;
     private TextView start;
     private TextView end;
     private ListView listView;
 
-    Course c1 = new Course("Course 1", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001)"));
-    Course c2 = new Course("Course 2", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
-    Course c3 = new Course("Course 3", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002)"));
-    Course c4 = new Course("Course 4", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
-    Course c5 = new Course("Course 5", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001)"));
-    Course c6 = new Course("Course 6", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
-    Course c7 = new Course("Course 7", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002)"));
-    Course c8 = new Course("Course 8", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
+//    Course c1 = new Course("Course 1", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001)"));
+//    Course c2 = new Course("Course 2", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
+//    Course c3 = new Course("Course 3", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002)"));
+//    Course c4 = new Course("Course 4", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
+//    Course c5 = new Course("Course 5", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001)"));
+//    Course c6 = new Course("Course 6", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
+//    Course c7 = new Course("Course 7", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002)"));
+//    Course c8 = new Course("Course 8", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
 
     public DetailTerm() throws ParseException {
     }
@@ -40,6 +42,8 @@ public class DetailTerm extends AppCompatActivity {
         setContentView(R.layout.activity_detail_term);
         setTitle("Term Details");
 
+        //Database
+        database = AppDatabase.getDatabase(getApplicationContext());
 
         title = (TextView) findViewById(R.id.term_detail_title);
         start = (TextView) findViewById(R.id.term_detail_start);
@@ -55,25 +59,32 @@ public class DetailTerm extends AppCompatActivity {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
             title.setText(currentTerm.title);
-            start.setText(df.format(currentTerm.start));
-            end.setText(df.format(currentTerm.end));
+            start.setText(currentTerm.start);
+            end.setText(currentTerm.end);
         }
 
         listView = (ListView) findViewById(R.id.courses_list_view);
 
-        final ArrayList<Course> courseList = new ArrayList<>();
+//        final ArrayList<Course> courseList = new ArrayList<>();
         //Load Sample Data
-        courseList.add(c1);
-        courseList.add(c2);
-        courseList.add(c3);
-        courseList.add(c4);
-        courseList.add(c5);
-        courseList.add(c6);
-        courseList.add(c7);
-        courseList.add(c8);
-        c1.setMentorName("Joe Brown");
-        c1.setMentorPhone("(201) 584-9638");
-        c1.setMentorEmail("brown@wgu.edu");
+//        courseList.add(c1);
+//        courseList.add(c2);
+//        courseList.add(c3);
+//        courseList.add(c4);
+//        courseList.add(c5);
+//        courseList.add(c6);
+//        courseList.add(c7);
+//        courseList.add(c8);
+//        c1.setMentorName("Joe Brown");
+//        c1.setMentorPhone("(201) 584-9638");
+//        c1.setMentorEmail("brown@wgu.edu");
+
+//        database.courseDao().addCourse(new Course(1, "course1", "this point", "that point", currentTerm.getId()));
+        database.courseDao().addCourse(new Course(2, "course2", "this point", "that point", 1));
+        database.courseDao().addCourse(new Course(3, "course3", "this point", "that point", 2));
+        System.out.println("Courses Added");
+
+        final ArrayList<Course> courseList = (ArrayList<Course>) database.courseDao().findCoursesForTerm(currentTerm.getId());
 
         final CourseAdapter adapter = new CourseAdapter(this, courseList);
         listView.setAdapter(adapter);

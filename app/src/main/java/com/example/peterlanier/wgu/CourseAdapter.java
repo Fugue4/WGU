@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -56,14 +54,14 @@ public class CourseAdapter extends BaseAdapter {
         TextView endTextView =
                 (TextView) rowView.findViewById(R.id.course_list_end);
 
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
         Course course = (Course) getItem(position);
 
 
         titleTextView.setText(course.title);
-        startTextView.setText(df.format(course.start));
-        endTextView.setText(df.format(course.end));
+        startTextView.setText(course.start);
+        endTextView.setText(course.end);
 
 
         return rowView;

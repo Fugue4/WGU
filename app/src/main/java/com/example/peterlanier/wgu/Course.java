@@ -1,45 +1,66 @@
 package com.example.peterlanier.wgu;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by peterlanier on 3/3/18.
  */
 
+@Entity(tableName = "course",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = Term.class,
+                        parentColumns = "id",
+                        childColumns = "termId",
+                        onDelete = ForeignKey.CASCADE
+                )},
+        indices = { @Index(value = "id")}
+)
+
 public class Course implements Serializable {
 
-    int id;
+    @PrimaryKey (autoGenerate = true)
+    final int id;
     String title;
-    Date start;
-    Date end;
+    String start;
+    String end;
     String status;
     String mentorName;
     String mentorPhone;
     String mentorEmail;
+    int deleted;
+    final int termId;
 
 
 
     String note;
     //array of mentor email addresses
-    int termId;
 
-    public Course(String title, Date start, Date end) {
+
+    public Course(int id, String title, String start, String end, int termId) {
+        this.id = id;
         this.title = title;
         this.start = start;
         this.end = end;
         this.mentorName = null;
         this.mentorPhone = null;
         this.mentorEmail = null;
+        this.deleted = 0;
+        this.termId = termId;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getTitle() {
         return title;
@@ -49,19 +70,19 @@ public class Course implements Serializable {
         this.title = title;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 
@@ -101,7 +122,7 @@ public class Course implements Serializable {
         return termId;
     }
 
-    public void setTermId(int termId) {
-        this.termId = termId;
-    }
+//    public void setTermId(int termId) {
+//        this.termId = termId;
+//    }
 }

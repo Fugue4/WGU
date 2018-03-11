@@ -1,32 +1,50 @@
 package com.example.peterlanier.wgu;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by peterlanier on 3/3/18.
  */
 
+@Entity(tableName = "assessment",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = Course.class,
+                        parentColumns = "id",
+                        childColumns = "courseId",
+                        onDelete = ForeignKey.CASCADE
+                )},
+        indices = { @Index(value = "id")}
+)
+
 public class Assessment implements Serializable {
 
-    int id;
+    @PrimaryKey (autoGenerate = true)
+    final int id;
     String title;
-    Date due;
+    String due;
     String goalDates;
-    int courseId;
+    final int courseId;
 
-    public Assessment(String title, Date due) {
+    public Assessment(int id, String title, String due, int courseId) {
+        this.id = id;
         this.title = title;
         this.due = due;
+        this.courseId = courseId;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getTitle() {
         return title;
@@ -36,11 +54,11 @@ public class Assessment implements Serializable {
         this.title = title;
     }
 
-    public Date getDue() {
+    public String getDue() {
         return due;
     }
 
-    public void setDue(Date due) {
+    public void setDue(String due) {
         this.due = due;
     }
 
@@ -48,8 +66,8 @@ public class Assessment implements Serializable {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
-    }
+//    public void setCourseId(int courseId) {
+//        this.courseId = courseId;
+//    }
 
 }

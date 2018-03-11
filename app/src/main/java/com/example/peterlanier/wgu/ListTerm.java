@@ -11,18 +11,20 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ListTerm extends AppCompatActivity {
 
     private ListView listView;
+    private AppDatabase database;
+    private Term term;
+
 
     //Create Sample Data
-    Term t1 = new Term("Spring Term 2001", new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2001"), new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001)"));
-    Term t2 = new Term("Fall Term 2001", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001"), new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2001)"));
-    Term t3 = new Term("Spring Term 2002", new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2002"), new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002)"));
-    Term t4 = new Term("Fall Term 2002", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002"), new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2002)"));
+//    Term t1 = new Term("Spring Term 2001", new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2001"), new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001)"));
+//    Term t2 = new Term("Fall Term 2001", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001"), new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2001)"));
+//    Term t3 = new Term("Spring Term 2002", new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2002"), new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002)"));
+//    Term t4 = new Term("Fall Term 2002", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002"), new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2002)"));
 
     public ListTerm() throws ParseException {
     }
@@ -34,14 +36,24 @@ public class ListTerm extends AppCompatActivity {
         setContentView(R.layout.activity_list_term);
         setTitle("Terms");
 
+        //Database
+        database = AppDatabase.getDatabase(getApplicationContext());
+
         listView = (ListView) findViewById(R.id.terms_list_view);
 
-        final ArrayList<Term> termList = new ArrayList<>();
+//        final ArrayList<Term> termList = new ArrayList<>();
         //Load Sample Data
-        termList.add(t1);
-        termList.add(t2);
-        termList.add(t3);
-        termList.add(t4);
+//        termList.add(t1);
+//        termList.add(t2);
+//        termList.add(t3);
+//        termList.add(t4);
+
+        database.termDao().removeAllTerms();
+        database.termDao().addTerm(new Term(1, "Test 1", "now", "then"));
+        database.termDao().addTerm(new Term(2, "Test 2", "now2", "then2"));
+//        term = database.termDao().getAllTerm().get(0);
+
+        final ArrayList<Term> termList = (ArrayList<Term>) database.termDao().getAllTerm();
 
         final TermAdapter adapter = new TermAdapter(this, termList);
         listView.setAdapter(adapter);

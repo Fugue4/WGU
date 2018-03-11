@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -56,14 +54,14 @@ public class TermAdapter extends BaseAdapter {
         TextView endTextView =
                 (TextView) rowView.findViewById(R.id.term_list_end);
 
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+//        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
         Term term = (Term) getItem(position);
 
 
         titleTextView.setText(term.title);
-        startTextView.setText(df.format(term.start));
-        endTextView.setText(df.format(term.end));
+        startTextView.setText(term.start);
+        endTextView.setText(term.end);
 
 
         return rowView;

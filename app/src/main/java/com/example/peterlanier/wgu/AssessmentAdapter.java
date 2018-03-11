@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -54,13 +52,10 @@ public class AssessmentAdapter extends BaseAdapter {
         TextView startTextView =
                 (TextView) rowView.findViewById(R.id.assessment_list_due);
 
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-
         Assessment assessment = (Assessment) getItem(position);
 
-
         titleTextView.setText(assessment.title);
-        startTextView.setText(df.format(assessment.due));
+        startTextView.setText(assessment.due);
 
 
         return rowView;

@@ -7,8 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-
 public class DetailAssessment extends AppCompatActivity {
 
     private TextView title;
@@ -30,10 +28,8 @@ public class DetailAssessment extends AppCompatActivity {
             //Retrieve Course From Previous Activity
             currentAssessment = (Assessment) b.getSerializable("CURRENT_ASSESSMENT");
 
-            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-
             title.setText(currentAssessment.title);
-            due.setText(df.format(currentAssessment.due));
+            due.setText(currentAssessment.due);
         }
     }
 

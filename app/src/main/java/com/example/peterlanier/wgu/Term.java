@@ -1,24 +1,26 @@
 package com.example.peterlanier.wgu;
+
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.io.Serializable;
-import java.util.Date;
 
 
 /**
  * Created by peterlanier on 2/17/18.
  */
 
+@Entity
 public class Term implements Serializable {
 
-    int id;
+    @PrimaryKey
+    final int id;
     String title;
-    Date start;
-    Date end;
+    String start;
+    String end;
 
-    public Term(String title) {
-        this.title = title;
-    }
-
-    public Term(String title, Date start, Date end) {
+    public Term(int id, String title, String start, String end) {
+        this.id = id;
         this.title = title;
         this.start = start;
         this.end = end;
@@ -27,7 +29,7 @@ public class Term implements Serializable {
 
     public int getId() { return id; }
 
-    public void setId(int id) { this.id = id; }
+//    public void setId(int id) { this.id = id; }
 
     public String getTitle() {
         return title;
@@ -37,19 +39,19 @@ public class Term implements Serializable {
         this.title = title;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 
