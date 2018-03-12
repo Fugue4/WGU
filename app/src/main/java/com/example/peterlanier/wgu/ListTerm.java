@@ -87,8 +87,10 @@ public class ListTerm extends AppCompatActivity {
         // Handle item selection
 
         switch (item.getItemId()) {
-            case R.id.navigation_edit_term:
-                System.out.println("edit_term");
+            case R.id.navigation_new_term:
+                System.out.println("new_term");
+                Intent i = new Intent(ListTerm.this, EditTerm.class);
+                startActivityForResult(i, 0);
                 return true;
             case R.id.navigation_new_course:
                 System.out.println("new_course");
