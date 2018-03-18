@@ -32,7 +32,7 @@
 
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <RelativeLayout
         android:id="@+id/input_layout_term_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,22 +43,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_term_title">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <EditText
+            <TextView
                 android:id="@+id/edit_term_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/hint_start"
                 android:inputType="date"
+                android:paddingLeft="10dp"
                 android:singleLine="true" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/edit_btn_term_start"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,14 +64,9 @@
                 android:onClick="setDate"
                 android:text="@string/hint_set" />
 
-
     </RelativeLayout>
 
-    </android.support.design.widget.TextInputLayout>
-
-
-
-    <android.support.design.widget.TextInputLayout
+    <RelativeLayout
         android:id="@+id/input_layout_term_end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,21 +77,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_layout_term_start">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
+            <TextView
                 android:id="@+id/edit_term_end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/hint_end"
                 android:inputType="date"
+                android:paddingLeft="10dp"
                 android:singleLine="true" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/edit_btn_term_end"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,9 +98,7 @@
                 android:onClick="setDate"
                 android:text="@string/hint_set" />
 
-        </RelativeLayout>
-
-    </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_cancel_term"

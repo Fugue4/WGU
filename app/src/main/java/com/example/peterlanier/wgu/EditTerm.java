@@ -2,29 +2,34 @@ package com.example.peterlanier.wgu;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
 public class EditTerm extends AppCompatActivity {
 
     private EditText title;
-    private EditText start;
-    private EditText end;
+    private TextView start;
+    private TextView end;
+    private Button cancel;
+    private Button save;
+    private Button btn_start;
+    private Button btn_end;
+    int sYear, sMonth, sDay, eYear, eMonth, eDay;
+    DatePickerDialog.OnDateSetListener from_dateListener,to_dateListener;
 
-    private DatePicker datePicker;
-    private Calendar calendar;
-    private int year, month, day;
+    final int DATE_PICKER_START = 0;
+    final int DATE_PICKER_END = 1;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -35,8 +40,14 @@ public class EditTerm extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         title = (EditText) findViewById(R.id.edit_term_title);
-        start = (EditText) findViewById(R.id.edit_term_start);
-        end = (EditText) findViewById(R.id.edit_term_end);
+        start = (TextView) findViewById(R.id.edit_term_start);
+        end = (TextView) findViewById(R.id.edit_term_end);
+        btn_start = (Button) findViewById(R.id.edit_btn_term_start);
+        btn_end = (Button) findViewById(R.id.edit_btn_term_end);
+        save = (Button) findViewById(R.id.btn_save_term);
+        cancel = (Button) findViewById(R.id.btn_cancel_term);
+
+        System.out.println("get tag 1" + btn_start.getTag());
 
         Term editTerm = null;
 
@@ -50,58 +61,89 @@ public class EditTerm extends AppCompatActivity {
 
 
             title.setText(editTerm.title, TextView.BufferType.EDITABLE);
-            title.selectAll();
-
             start.setText(editTerm.start);
             end.setText(editTerm.end);
 
-            calendar = Calendar.getInstance();
-            year = calendar.get(Calendar.YEAR);
-
-            month = calendar.get(Calendar.MONTH);
-            day = calendar.get(Calendar.DAY_OF_MONTH);
-            showDate(year, month+1, day);
         }
 
+//        calendar = Calendar.getInstance();
+//        year = calendar.get(Calendar.YEAR);
+//        month = calendar.get(Calendar.MONTH);
+//        day = calendar.get(Calendar.DAY_OF_MONTH);
+//        showDate(year, month+1, day);
+
+        btn_start.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showDialog(DATE_PICKER_START);
+            }
+        });
+
+        btn_end.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showDialog(DATE_PICKER_END);
+            }
+        });
+
+        from_dateListener = new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+                setStartDate(arg1, arg2+1, arg3);
+                System.out.println("heard date picker start");
+            }
+        };
+
+
+        to_dateListener = new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet (DatePicker arg0,int arg1, int arg2, int arg3){
+                setEndDate(arg1, arg2+1, arg3);
+                System.out.println("heard date picker end");
+            }
+        };
+
+        save.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
+
     }
+
+
 
 
 
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
         showDialog(999);
-        Toast.makeText(getApplicationContext(), "Calendar",
-                Toast.LENGTH_SHORT)
-                .show();
+    }
+
+    private void setStartDate(int year, int month, int day) {
+        start.setText(new StringBuilder().append(month)
+                .append("/").append(day)
+                .append("/").append(year));
+    }
+
+    private void setEndDate(int year, int month, int day) {
+        end.setText(new StringBuilder().append(month)
+                .append("/").append(day)
+                .append("/").append(year));
     }
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
-        if (id == 999) {
-            return new DatePickerDialog(this,
-                    myDateListener, year, month, day);
+
+        switch(id){
+            case DATE_PICKER_START:
+                return new DatePickerDialog(this, from_dateListener, sYear, sMonth, sDay);
+            case DATE_PICKER_END:
+                return new DatePickerDialog(this, to_dateListener, eYear, eMonth, eDay);
         }
         return null;
     }
-
-    private DatePickerDialog.OnDateSetListener myDateListener = new
-            DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker arg0,
-                                      int arg1, int arg2, int arg3) {
-                    // TODO Auto-generated method stub
-                    // arg1 = year
-                    // arg2 = month
-                    // arg3 = day
-                    showDate(arg1, arg2+1, arg3);
-                }
-            };
-
-    private void showDate(int year, int month, int day) {
-        start.setText(new StringBuilder().append(day).append("/")
-                .append(month).append("/").append(year));
-    }
-
 
 }
