@@ -48,9 +48,9 @@ public class ListTerm extends AppCompatActivity {
 //        termList.add(t3);
 //        termList.add(t4);
 
-        database.termDao().removeAllTerms();
-        database.termDao().addTerm(new Term(1, "Test 1", "now", "then"));
-        database.termDao().addTerm(new Term(2, "Test 2", "now2", "then2"));
+//        database.termDao().removeAllTerms();
+//        database.termDao().addTerm(new Term(0, "Test 1", "now", "then"));
+//        database.termDao().addTerm(new Term(0, "Test 2", "now2", "then2"));
 //        term = database.termDao().getAllTerm().get(0);
 
         final ArrayList<Term> termList = (ArrayList<Term>) database.termDao().getAllTerm();

@@ -2,6 +2,7 @@ package com.example.peterlanier.wgu;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 
 public class EditTerm extends AppCompatActivity {
 
+    private AppDatabase database;
     private EditText title;
     private TextView start;
     private TextView end;
@@ -24,6 +26,7 @@ public class EditTerm extends AppCompatActivity {
     private Button save;
     private Button btn_start;
     private Button btn_end;
+    private boolean update = false;
     int sYear, sMonth, sDay, eYear, eMonth, eDay;
     DatePickerDialog.OnDateSetListener from_dateListener,to_dateListener;
 
@@ -38,6 +41,7 @@ public class EditTerm extends AppCompatActivity {
         setContentView(R.layout.activity_edit_term);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        database = AppDatabase.getDatabase(getApplicationContext());
 
         title = (EditText) findViewById(R.id.edit_term_title);
         start = (TextView) findViewById(R.id.edit_term_start);
@@ -49,21 +53,22 @@ public class EditTerm extends AppCompatActivity {
 
         System.out.println("get tag 1" + btn_start.getTag());
 
-        Term editTerm = null;
+        Term currentTerm = null;
+
 
         Bundle b = this.getIntent().getExtras();
         if (b != null) {
             //Retrieve Term From Previous Activity
-            editTerm = (Term) b.getSerializable("EDIT_TERM");
-            System.out.println("After load " + editTerm.title);
+            currentTerm = (Term) b.getSerializable("EDIT_TERM");
+            System.out.println("After load " + currentTerm.title);
 
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
 
-            title.setText(editTerm.title, TextView.BufferType.EDITABLE);
-            start.setText(editTerm.start);
-            end.setText(editTerm.end);
-
+            title.setText(currentTerm.title, TextView.BufferType.EDITABLE);
+            start.setText(currentTerm.start);
+            end.setText(currentTerm.end);
+            update = true;
         }
 
 //        calendar = Calendar.getInstance();
@@ -102,19 +107,32 @@ public class EditTerm extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                if (update = true){
+                    database.termDao().updateTerm(new Term(0, title.getText().toString(), start.getText().toString(), end.getText().toString()));
+                    System.out.println("term updated");
+                } else {
+                    database.termDao().addTerm(new Term(0, title.getText().toString(), start.getText().toString(), end.getText().toString()));
+                    System.out.println("term added");
+                }
+
+                returnToListTerm();
+
             }
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                returnToListTerm();
             }
         });
 
     }
 
 
-
+    private void returnToListTerm(){
+        Intent i = new Intent(EditTerm.this, ListTerm.class);
+        startActivityForResult(i, 0);
+    }
 
 
     @SuppressWarnings("deprecation")

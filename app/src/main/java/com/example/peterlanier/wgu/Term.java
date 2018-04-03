@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Entity
 public class Term implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey (autoGenerate = true)
     final int id;
     String title;
     String start;

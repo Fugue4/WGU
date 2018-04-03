@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,6 +24,8 @@ public class DetailTerm extends AppCompatActivity {
     private TextView start;
     private TextView end;
     private ListView listView;
+    private Button delete;
+    private Term currentTerm;
 
 //    Course c1 = new Course("Course 1", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001)"));
 //    Course c2 = new Course("Course 2", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
@@ -34,6 +37,7 @@ public class DetailTerm extends AppCompatActivity {
 //    Course c8 = new Course("Course 8", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
 
     public DetailTerm() throws ParseException {
+
     }
 
     @Override
@@ -48,8 +52,7 @@ public class DetailTerm extends AppCompatActivity {
         title = (TextView) findViewById(R.id.term_detail_title);
         start = (TextView) findViewById(R.id.term_detail_start);
         end = (TextView) findViewById(R.id.term_detail_end);
-
-        Term currentTerm = null;
+        delete = (Button) findViewById(R.id.btn_delete_term);
 
         Bundle b = this.getIntent().getExtras();
         if (b != null) {
@@ -80,8 +83,8 @@ public class DetailTerm extends AppCompatActivity {
 //        c1.setMentorEmail("brown@wgu.edu");
 
 //        database.courseDao().addCourse(new Course(1, "course1", "this point", "that point", currentTerm.getId()));
-        database.courseDao().addCourse(new Course(2, "course2", "this point", "that point", 1));
-        database.courseDao().addCourse(new Course(3, "course3", "this point", "that point", 2));
+//        database.courseDao().addCourse(new Course(2, "course2", "this point", "that point", 1));
+//        database.courseDao().addCourse(new Course(3, "course3", "this point", "that point", 2));
         System.out.println("Courses Added");
 
         final ArrayList<Course> courseList = (ArrayList<Course>) database.courseDao().findCoursesForTerm(currentTerm.getId());
@@ -120,6 +123,20 @@ public class DetailTerm extends AppCompatActivity {
 //            }
 //        });
 
+        //Delete Term
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(currentTerm != null){
+                    database.termDao().removeTerm(currentTerm);
+
+                    System.out.println("Deleted Term");
+                    Intent i = new Intent(DetailTerm.this, ListTerm.class);
+                    startActivityForResult(i, 0);
+
+                }
+            }
+        });
 
 
 

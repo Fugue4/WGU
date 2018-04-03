@@ -48,6 +48,17 @@
             tools:text="End" />
 
     </LinearLayout>
+    <Button
+        android:id="@+id/btn_delete_term"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/holo_red_dark"
+        android:text="DELETE TERM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_term_end" />
 
     <ListView
         android:id="@+id/courses_list_view"
