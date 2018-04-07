@@ -29,7 +29,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ListTerm" />
         <activity android:name=".DetailCourse" />
-        <activity android:name=".DetailAssessment"></activity>
+        <activity android:name=".DetailAssessment" />
+        <activity android:name=".EditCourse"></activity>
     </application>
 
 </manifest>

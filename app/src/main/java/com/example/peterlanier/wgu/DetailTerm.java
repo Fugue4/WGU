@@ -156,6 +156,13 @@ public class DetailTerm extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.navigation_edit_term:
                 System.out.println("edit_term");
+
+                Intent i = new Intent(DetailTerm.this, EditTerm.class);
+                Bundle b = new Bundle();
+                b.putSerializable("EDIT_TERM", currentTerm);
+                i.putExtras(b);
+                startActivityForResult(i, 0);
+
                 return true;
             case R.id.navigation_new_course:
                 System.out.println("new_course");

@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
         database = AppDatabase.getDatabase(getApplicationContext());;
 
-        database.termDao().addTerm(new Term(0, "Test 1", "now", "then"));
-        database.termDao().addTerm(new Term(0, "Test 2", "now2", "then2"));
+//        database.termDao().addTerm(new Term(0, "Test 1", "now", "then"));
+//        database.termDao().addTerm(new Term(0, "Test 2", "now2", "then2"));
 
         final Button button = (Button) findViewById(R.id.home_button);
         button.setOnClickListener(new View.OnClickListener() {

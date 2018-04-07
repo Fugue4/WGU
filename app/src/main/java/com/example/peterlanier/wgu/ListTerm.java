@@ -90,11 +90,11 @@ public class ListTerm extends AppCompatActivity {
             case R.id.navigation_new_term:
                 System.out.println("new_term");
                 Intent i = new Intent(ListTerm.this, EditTerm.class);
-                startActivityForResult(i, 0);
+                startActivity(i);
                 return true;
-            case R.id.navigation_new_course:
-                System.out.println("new_course");
-                return true;
+//            case R.id.navigation_new_course:
+//                System.out.println("new_course");
+//                return true;
             default:
                 System.out.println("I failed");
                 return super.onOptionsItemSelected(item);

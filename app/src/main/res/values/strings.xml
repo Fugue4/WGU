@@ -21,6 +21,14 @@
     <string name="hint_end">End Date</string>
     <string name="hint_set">Date Picker</string>
 
+    <!--Edit Course-->
+    <string name="hint_mentor">Mentor</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_email">Email</string>
+    <string name="status_1">Active</string>
+    <string name="status_2">Completed</string>
+    <string name="status_3">Dropped</string>
+
     <!--List Item-->
     <string name="start">Start:</string>
     <string name="end">End:</string>
