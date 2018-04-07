@@ -25,7 +25,7 @@ public class EditTerm extends AppCompatActivity {
     private Button btn_start;
     private Button btn_end;
     private boolean update;
-    int sYear, sMonth, sDay, eYear, eMonth, eDay;
+    int sYear = 2015, sMonth, sDay, eYear = 2016, eMonth, eDay;
     DatePickerDialog.OnDateSetListener from_dateListener,to_dateListener;
     private Term currentTerm;
     private Term updateTerm;

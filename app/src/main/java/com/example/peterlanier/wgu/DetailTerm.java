@@ -155,8 +155,6 @@ public class DetailTerm extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.navigation_edit_term:
-                System.out.println("edit_term");
-
                 Intent i = new Intent(DetailTerm.this, EditTerm.class);
                 Bundle b = new Bundle();
                 b.putSerializable("EDIT_TERM", currentTerm);
@@ -165,7 +163,11 @@ public class DetailTerm extends AppCompatActivity {
 
                 return true;
             case R.id.navigation_new_course:
-                System.out.println("new_course");
+                Intent ii = new Intent(DetailTerm.this, EditCourse.class);
+                Bundle bb = new Bundle();
+                bb.putSerializable("EDIT_TERM", currentTerm);
+                ii.putExtras(bb);
+                startActivityForResult(ii, 0);
                 return true;
             default:
                 System.out.println("I failed");
