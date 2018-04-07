@@ -25,7 +25,7 @@ public class EditTerm extends AppCompatActivity {
     private Button btn_start;
     private Button btn_end;
     private boolean update;
-    int sYear = 2015, sMonth, sDay, eYear = 2016, eMonth, eDay;
+    int sYear = 2018, sMonth = 0, sDay = 1, eYear = 2018, eMonth = 11, eDay = 31;
     DatePickerDialog.OnDateSetListener from_dateListener,to_dateListener;
     private Term currentTerm;
     private Term updateTerm;
@@ -62,13 +62,8 @@ public class EditTerm extends AppCompatActivity {
         if (b != null) {
 
             if (b.containsKey("EDIT_TERM")) {
-                System.out.println("this shit has a key?!");
                 //Retrieve Term From Previous Activity
                 currentTerm = (Term) b.getSerializable("EDIT_TERM");
-                System.out.println("After load " + currentTerm.title);
-
-//                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-
 
                 title.setText(currentTerm.title, TextView.BufferType.EDITABLE);
                 start.setText(currentTerm.start);
@@ -77,14 +72,6 @@ public class EditTerm extends AppCompatActivity {
             }
 
         }
-
-        System.out.println(update);
-
-//        calendar = Calendar.getInstance();
-//        year = calendar.get(Calendar.YEAR);
-//        month = calendar.get(Calendar.MONTH);
-//        day = calendar.get(Calendar.DAY_OF_MONTH);
-//        showDate(year, month+1, day);
 
         btn_start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -116,6 +103,9 @@ public class EditTerm extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                if (currentTerm == null){
+                    currentTerm = new Term(0, title.getText().toString(), start.getText().toString(), end.getText().toString());
+                }
                 updateTerm = setTerm();
 
                 if (update){
@@ -123,7 +113,7 @@ public class EditTerm extends AppCompatActivity {
                     System.out.println("term updated");
                 } else {
                     System.out.println("this line fired");
-                    database.termDao().addTerm(new Term(0, title.getText().toString(), start.getText().toString(), end.getText().toString()));
+                    database.termDao().addTerm(updateTerm);
                     System.out.println("term added");
                 }
 
@@ -142,17 +132,9 @@ public class EditTerm extends AppCompatActivity {
 
     private Term setTerm(){
 
-        if (currentTerm.title != title.getText().toString()){
-            currentTerm.setTitle(title.getText().toString());
-        }
-
-        if (currentTerm.start != start.getText().toString()){
-            currentTerm.setStart(start.getText().toString());
-        }
-
-        if (currentTerm.end != end.getText().toString()){
-            currentTerm.setEnd(end.getText().toString());
-        }
+        currentTerm.setTitle(title.getText().toString());
+        currentTerm.setStart(start.getText().toString());
+        currentTerm.setEnd(end.getText().toString());
 
         return currentTerm;
     }

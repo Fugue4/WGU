@@ -21,6 +21,7 @@ public class EditCourse extends AppCompatActivity {
     private EditText phones;
     private EditText emails;
     private String statusValue;
+    private RadioButton r1, r2, r3;
 
     private Button cancel;
     private Button save;
@@ -29,7 +30,8 @@ public class EditCourse extends AppCompatActivity {
     private Boolean update;
     private AppDatabase database;
     private Course updateCourse;
-    private Course currentCourse;
+    private Course c;
+    private Term t;
 
 
     //Datepicker
@@ -51,14 +53,56 @@ public class EditCourse extends AppCompatActivity {
         mentor = (EditText) findViewById(R.id.edit_course_mentor);
         phones = (EditText) findViewById(R.id.edit_course_phones);
         emails = (EditText) findViewById(R.id.edit_course_emails);
-//        status = ();
+        r1 = (RadioButton) findViewById(R.id.radio_status_1);
+        r2 = (RadioButton) findViewById(R.id.radio_status_2);
+        r3 = (RadioButton) findViewById(R.id.radio_status_3);
         save = (Button) findViewById(R.id.btn_save_course);
         cancel = (Button) findViewById(R.id.btn_cancel_course);
         btn_start = (Button) findViewById(R.id.edit_btn_course_start);
         btn_end = (Button) findViewById(R.id.edit_btn_course_end);
 
-        currentCourse = null;
+        c = null;
         update = false;
+
+        Bundle b = this.getIntent().getExtras();
+        if (b != null) {
+
+            if (b.containsKey("PARENT_TERM")) {
+                //Retrieve Term From Previous Activity
+                t = (Term) b.getSerializable("PARENT_TERM");
+
+                setTitle("Add course to " + t.title);
+            }
+
+            if (b.containsKey("CURRENT_COURSE")) {
+                c = (Course) b.getSerializable("CURRENT_COURSE");
+                title.setText(c.title);
+                start.setText(c.start);
+                end.setText(c.end);
+                mentor.setText(c.mentorName);
+                phones.setText(c.mentorPhone);
+                emails.setText(c.mentorEmail);
+
+                if (c.status != null) {
+                    switch (c.status) {
+                        case "In Progress":
+                            r1.toggle();
+                            break;
+                        case "Completed":
+                            r2.toggle();
+                            break;
+                        case "Dropped":
+                            r3.toggle();
+                            break;
+                    }
+                }
+
+                update = true;
+
+            }
+
+        }
+
 
         btn_start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -90,15 +134,17 @@ public class EditCourse extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                if (c == null) {
+                    c = new Course(0, title.getText().toString(), start.getText().toString(), end.getText().toString(), t.id);
+                }
                 updateCourse = setCourse();
 
                 if (update){
                     database.courseDao().updateCourse(updateCourse);
-                    System.out.println("term updated");
+                    System.out.println("course updated");
                 } else {
-                    System.out.println("this line fired");
-//                    database.courseDao().addCourse(new Term(0, title.getText().toString(), start.getText().toString(), end.getText().toString()));
-                    System.out.println("term added");
+                    database.courseDao().addCourse(updateCourse);
+                    System.out.println("course added");
                 }
 
                 returnToDetailTerm();
@@ -111,7 +157,6 @@ public class EditCourse extends AppCompatActivity {
                 returnToDetailTerm();
             }
         });
-
 
     }
 
@@ -168,41 +213,24 @@ public class EditCourse extends AppCompatActivity {
     }
 
     private void returnToDetailTerm(){
-        Intent i = new Intent(EditCourse.this, DetailTerm.class);
-        startActivity(i);
+        Intent i = new Intent(EditCourse.this, DetailCourse.class);
+        Bundle b = new Bundle();
+        b.putSerializable("CURRENT_COURSE", c);
+        i.putExtras(b);
+        startActivityForResult(i, 0);
     }
 
     private Course setCourse(){
 
-        if (currentCourse.title != title.getText().toString()){
-            currentCourse.setTitle(title.getText().toString());
-        }
+        c.setTitle(title.getText().toString());
+        c.setStart(start.getText().toString());
+        c.setEnd(end.getText().toString());
+        c.setMentorName(mentor.getText().toString());
+        c.setMentorPhone(phones.getText().toString());
+        c.setMentorEmail(emails.getText().toString());
+        c.setStatus(statusValue);
 
-        if (currentCourse.start != start.getText().toString()){
-            currentCourse.setStart(start.getText().toString());
-        }
-
-        if (currentCourse.end != end.getText().toString()){
-            currentCourse.setEnd(end.getText().toString());
-        }
-
-        if (currentCourse.mentorName != mentor.getText().toString()){
-            currentCourse.setMentorName(mentor.getText().toString());
-        }
-
-        if (currentCourse.mentorPhone != phones.getText().toString()){
-            currentCourse.setMentorPhone(phones.getText().toString());
-        }
-
-        if (currentCourse.mentorEmail != emails.getText().toString()){
-            currentCourse.setMentorPhone(emails.getText().toString());
-        }
-
-        if (currentCourse.status != statusValue){
-            currentCourse.setStatus(statusValue);
-        }
-
-        return currentCourse;
+        return c;
     }
 
 }

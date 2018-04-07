@@ -24,12 +24,9 @@ public class DetailCourse extends AppCompatActivity {
     private TextView mentor;
     private TextView mentorPhone;
     private TextView mentorEmail;
+    private TextView status;
     private ListView listView;
-
-//    Assessment a1 = new Assessment("Assessment 1", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2001)"));
-//    Assessment a2 = new Assessment("Assessment 2", new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2001)"));
-//    Assessment a3 = new Assessment("Assessment 3", new SimpleDateFormat("dd/MM/yyyy").parse("01/06/2002)"));
-//    Assessment a4 = new Assessment("Assessment 4", new SimpleDateFormat("dd/MM/yyyy").parse("01/12/2002)"));
+    private Course currentCourse;
 
     public DetailCourse() throws ParseException {
     }
@@ -49,8 +46,9 @@ public class DetailCourse extends AppCompatActivity {
         mentor = (TextView) findViewById(R.id.course_detail_mentor);
         mentorPhone = (TextView) findViewById(R.id.course_detail_mentor_phone);
         mentorEmail = (TextView) findViewById(R.id.course_detail_mentor_email);
+        status = (TextView) findViewById(R.id.course_detail_status);
 
-        Course currentCourse = null;
+        currentCourse = null;
 
         Bundle b = this.getIntent().getExtras();
         if (b != null) {
@@ -65,19 +63,12 @@ public class DetailCourse extends AppCompatActivity {
             mentor.setText(currentCourse.mentorName);
             mentorPhone.setText(currentCourse.mentorPhone);
             mentorEmail.setText(currentCourse.mentorEmail);
+            status.setText(currentCourse.status);
+
         }
 
         listView = (ListView) findViewById(R.id.assessments_list_view);
 
-//        final ArrayList<Assessment> assessmentList = new ArrayList<>();
-        //Load Sample Data
-//        assessmentList.add(a1);
-//        assessmentList.add(a2);
-//        assessmentList.add(a3);
-//        assessmentList.add(a4);
-
-        database.assessmentDao().addAssessment(new Assessment(1, "Hello", "immediately", 2));
-//        database.courseDao().addCourse(new Course(3, "course3", "this point", "that point", 2));
         System.out.println("Courses Added");
 
         final ArrayList<Assessment> assessmentList = (ArrayList<Assessment>) database.assessmentDao().findAssessmentsForCourse(currentCourse.getId());
@@ -117,7 +108,13 @@ public class DetailCourse extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.navigation_edit_course:
-                System.out.println("edit_course");
+
+                Intent i = new Intent(DetailCourse.this, EditCourse.class);
+                Bundle b = new Bundle();
+                b.putSerializable("CURRENT_COURSE", currentCourse);
+                i.putExtras(b);
+                startActivityForResult(i, 0);
+
                 return true;
             case R.id.navigation_new_assessment:
                 System.out.println("new_assessment");

@@ -27,15 +27,6 @@ public class DetailTerm extends AppCompatActivity {
     private Button delete;
     private Term currentTerm;
 
-//    Course c1 = new Course("Course 1", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001)"));
-//    Course c2 = new Course("Course 2", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
-//    Course c3 = new Course("Course 3", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002)"));
-//    Course c4 = new Course("Course 4", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
-//    Course c5 = new Course("Course 5", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001)"));
-//    Course c6 = new Course("Course 6", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2001"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2001)"));
-//    Course c7 = new Course("Course 7", new SimpleDateFormat("MM/dd/yyyy").parse("01/01/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002)"));
-//    Course c8 = new Course("Course 8", new SimpleDateFormat("MM/dd/yyyy").parse("01/06/2002"), new SimpleDateFormat("MM/dd/yyyy").parse("01/12/2002)"));
-
     public DetailTerm() throws ParseException {
 
     }
@@ -68,23 +59,6 @@ public class DetailTerm extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.courses_list_view);
 
-//        final ArrayList<Course> courseList = new ArrayList<>();
-        //Load Sample Data
-//        courseList.add(c1);
-//        courseList.add(c2);
-//        courseList.add(c3);
-//        courseList.add(c4);
-//        courseList.add(c5);
-//        courseList.add(c6);
-//        courseList.add(c7);
-//        courseList.add(c8);
-//        c1.setMentorName("Joe Brown");
-//        c1.setMentorPhone("(201) 584-9638");
-//        c1.setMentorEmail("brown@wgu.edu");
-
-//        database.courseDao().addCourse(new Course(1, "course1", "this point", "that point", currentTerm.getId()));
-//        database.courseDao().addCourse(new Course(2, "course2", "this point", "that point", 1));
-//        database.courseDao().addCourse(new Course(3, "course3", "this point", "that point", 2));
         System.out.println("Courses Added");
 
         final ArrayList<Course> courseList = (ArrayList<Course>) database.courseDao().findCoursesForTerm(currentTerm.getId());
@@ -108,21 +82,6 @@ public class DetailTerm extends AppCompatActivity {
             }
         });
 
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        final Term editTerm = currentTerm;
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent i = new Intent(getBaseContext(), EditTerm.class);
-//                Bundle b = new Bundle();
-//                b.putSerializable("EDIT_TERM", editTerm);
-//                i.putExtras(b);
-//                startActivityForResult(i, 0);
-//            }
-//        });
-
         //Delete Term
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,8 +96,6 @@ public class DetailTerm extends AppCompatActivity {
                 }
             }
         });
-
-
 
     }
 
@@ -165,7 +122,7 @@ public class DetailTerm extends AppCompatActivity {
             case R.id.navigation_new_course:
                 Intent ii = new Intent(DetailTerm.this, EditCourse.class);
                 Bundle bb = new Bundle();
-                bb.putSerializable("EDIT_TERM", currentTerm);
+                bb.putSerializable("PARENT_TERM", currentTerm);
                 ii.putExtras(bb);
                 startActivityForResult(ii, 0);
                 return true;

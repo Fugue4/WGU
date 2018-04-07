@@ -34,13 +34,9 @@ public class Course implements Serializable {
     String mentorPhone;
     String mentorEmail;
     int deleted;
-    final int termId;
-
-
+    int termId;
 
     String note;
-    //array of mentor email addresses
-
 
     public Course(int id, String title, String start, String end, int termId) {
         this.id = id;
@@ -122,7 +118,5 @@ public class Course implements Serializable {
         return termId;
     }
 
-//    public void setTermId(int termId) {
-//        this.termId = termId;
-//    }
+    public void setTermId(int termId) { this.termId = termId; }
 }
