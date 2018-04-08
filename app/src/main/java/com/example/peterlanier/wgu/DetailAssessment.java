@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class DetailAssessment extends AppCompatActivity {
 
     private TextView title;
@@ -16,12 +18,14 @@ public class DetailAssessment extends AppCompatActivity {
     private TextView notes;
     private TextView type;
     private Assessment currentAssessment;
+    private AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_assessment);
         setTitle("Assessment Details");
+        database = AppDatabase.getDatabase(getApplicationContext());
 
         title = (TextView) findViewById(R.id.assessment_detail_title);
         due = (TextView) findViewById(R.id.assessment_detail_due);
@@ -50,14 +54,22 @@ public class DetailAssessment extends AppCompatActivity {
         // Handle item selection
 
         switch (item.getItemId()) {
-            case R.id.navigation_edit_assessment:
+            case R.id.navigation_course_detail:
+                List l =  database.courseDao().findCourseFromAssessment(currentAssessment.courseId);
+                Course currentCourse = (Course) l.get(0);
 
+                Intent iii = new Intent(DetailAssessment.this, DetailCourse.class);
+                Bundle bbb = new Bundle();
+                bbb.putSerializable("CURRENT_COURSE", currentCourse);
+                iii.putExtras(bbb);
+                startActivity(iii);
+                return true;
+            case R.id.navigation_edit_assessment:
                 Intent i = new Intent(DetailAssessment.this, EditAssessment.class);
                 Bundle b = new Bundle();
                 b.putSerializable("CURRENT_ASSESSMENT", currentAssessment);
                 i.putExtras(b);
                 startActivityForResult(i, 0);
-
                 return true;
             default:
                 System.out.println("I failed");

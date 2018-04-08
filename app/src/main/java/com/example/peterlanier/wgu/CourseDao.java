@@ -20,9 +20,15 @@ public interface CourseDao {
     @Query("SELECT * FROM course WHERE termId=:termId")
     List<Course> findCoursesForTerm(int termId);
 
+    @Query("SELECT * FROM course WHERE id=:courseId")
+    List <Course> findCourseFromAssessment(int courseId);
+
+    @Query("DELETE FROM course WHERE termId=:termId")
+    void deleteCoursesFromTerm(int termId);
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void updateCourse(Course course);
 
-    @Query("delete from course where id = :id")
+    @Query("DELETE FROM course WHERE id = :id")
     void delete(long id);
 }

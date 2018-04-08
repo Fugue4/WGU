@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_term_detail"
+        android:title="@string/title_term_detail" />
+
+    <item
         android:id="@+id/navigation_edit_course"
         android:title="@string/title_edit_course" />
 

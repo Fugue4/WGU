@@ -10,14 +10,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DetailCourse extends AppCompatActivity {
 
     private AppDatabase database;
-    private Assessment assessment;
     private TextView title;
     private TextView start;
     private TextView end;
@@ -54,8 +54,6 @@ public class DetailCourse extends AppCompatActivity {
         if (b != null) {
             //Retrieve Course From Previous Activity
             currentCourse = (Course) b.getSerializable("CURRENT_COURSE");
-
-            SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
             title.setText(currentCourse.title);
             start.setText(currentCourse.start);
@@ -107,6 +105,18 @@ public class DetailCourse extends AppCompatActivity {
         // Handle item selection
 
         switch (item.getItemId()) {
+            case R.id.navigation_term_detail:
+
+                List l =  database.termDao().getTerm(currentCourse.termId);
+                Term currentTerm = (Term) l.get(0);
+
+                Intent iii = new Intent(DetailCourse.this, DetailTerm.class);
+                Bundle bbb = new Bundle();
+                bbb.putSerializable("CURRENT_TERM", currentTerm);
+                iii.putExtras(bbb);
+                startActivityForResult(iii, 0);
+
+                return true;
             case R.id.navigation_edit_course:
 
                 Intent i = new Intent(DetailCourse.this, EditCourse.class);

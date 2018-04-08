@@ -1,5 +1,7 @@
 package com.example.peterlanier.wgu;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,7 @@ public class DetailTerm extends AppCompatActivity {
     private ListView listView;
     private Button delete;
     private Term currentTerm;
+
 
     public DetailTerm() throws ParseException {
 
@@ -87,15 +90,48 @@ public class DetailTerm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(currentTerm != null){
-                    database.termDao().removeTerm(currentTerm);
 
-                    System.out.println("Deleted Term");
-                    Intent i = new Intent(DetailTerm.this, ListTerm.class);
-                    startActivityForResult(i, 0);
+                    if(!database.courseDao().findCoursesForTerm(currentTerm.id).isEmpty()) {
+
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailTerm.this);
+                        alertDialogBuilder.setTitle("Cannot Delete Term");
+                        alertDialogBuilder
+                                .setMessage("You can not delete a term that has associated courses. You may delete all courses associated with this term now, but this action cannot be undone.")
+                                .setCancelable(false)
+                                .setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                })
+                                .setNegativeButton("Delete All Courses Now", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+
+                                        database.courseDao().deleteCoursesFromTerm(currentTerm.id);
+
+                                        Intent intent = getIntent();
+                                        finish();
+                                        startActivity(intent);
+
+                                    }
+                                });
+
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+                        alertDialog.show();
+
+                    } else {
+                        database.termDao().removeTerm(currentTerm);
+
+                        System.out.println("Deleted Term");
+                        Intent i = new Intent(DetailTerm.this, ListTerm.class);
+                        startActivityForResult(i, 0);
+                    }
 
                 }
             }
         });
+
+
+
 
     }
 
@@ -111,13 +147,16 @@ public class DetailTerm extends AppCompatActivity {
         // Handle item selection
 
         switch (item.getItemId()) {
+            case R.id.navigation_list_terms:
+                Intent iii = new Intent(DetailTerm.this, ListTerm.class);
+                startActivity(iii);
+                return true;
             case R.id.navigation_edit_term:
                 Intent i = new Intent(DetailTerm.this, EditTerm.class);
                 Bundle b = new Bundle();
                 b.putSerializable("EDIT_TERM", currentTerm);
                 i.putExtras(b);
                 startActivityForResult(i, 0);
-
                 return true;
             case R.id.navigation_new_course:
                 Intent ii = new Intent(DetailTerm.this, EditCourse.class);
@@ -127,12 +166,13 @@ public class DetailTerm extends AppCompatActivity {
                 startActivityForResult(ii, 0);
                 return true;
             default:
-                System.out.println("I failed");
                 return super.onOptionsItemSelected(item);
         }
 
 
     }
+
+
 
 
 }

@@ -217,7 +217,7 @@ public class EditCourse extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putSerializable("CURRENT_COURSE", c);
         i.putExtras(b);
-        startActivityForResult(i, 0);
+        startActivity(i);
     }
 
     private Course setCourse(){

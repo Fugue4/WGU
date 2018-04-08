@@ -148,8 +148,6 @@ public class EditAssessment extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     public void onRadioButtonClicked2(View view) {

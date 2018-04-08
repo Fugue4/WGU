@@ -48,6 +48,7 @@
             tools:text="End" />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/btn_delete_term"
         style="@style/Widget.AppCompat.Button.Colored"
