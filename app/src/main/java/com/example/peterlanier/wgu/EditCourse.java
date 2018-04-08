@@ -147,14 +147,14 @@ public class EditCourse extends AppCompatActivity {
                     System.out.println("course added");
                 }
 
-                returnToDetailTerm();
+                returnToDetailCourse();
 
             }
         });
 
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                returnToDetailTerm();
+                returnToDetailCourse();
             }
         });
 
@@ -212,7 +212,7 @@ public class EditCourse extends AppCompatActivity {
         return null;
     }
 
-    private void returnToDetailTerm(){
+    private void returnToDetailCourse(){
         Intent i = new Intent(EditCourse.this, DetailCourse.class);
         Bundle b = new Bundle();
         b.putSerializable("CURRENT_COURSE", c);

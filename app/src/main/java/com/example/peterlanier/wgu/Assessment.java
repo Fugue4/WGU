@@ -28,8 +28,10 @@ public class Assessment implements Serializable {
     final int id;
     String title;
     String due;
-    String goalDates;
-    final int courseId;
+    String goal;
+    String type;
+    String notes;
+    int courseId;
 
     public Assessment(int id, String title, String due, int courseId) {
         this.id = id;
@@ -62,12 +64,30 @@ public class Assessment implements Serializable {
         this.due = due;
     }
 
+    public String getGoal() {
+        return goal;
+    }
+
+    public void setType(String type) { this.type = type; }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setGoal(String goal) { this.goal = goal; }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
     public int getCourseId() {
         return courseId;
     }
 
-//    public void setCourseId(int courseId) {
-//        this.courseId = courseId;
-//    }
+    public void setCourseId(int courseId) { this.courseId = courseId; }
 
 }

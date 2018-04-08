@@ -117,7 +117,13 @@ public class DetailCourse extends AppCompatActivity {
 
                 return true;
             case R.id.navigation_new_assessment:
-                System.out.println("new_assessment");
+
+                Intent ii = new Intent(DetailCourse.this, EditAssessment.class);
+                Bundle bb = new Bundle();
+                bb.putSerializable("PARENT_COURSE", currentCourse);
+                ii.putExtras(bb);
+                startActivityForResult(ii, 0);
+
                 return true;
             default:
                 System.out.println("I failed");

@@ -29,6 +29,13 @@
     <string name="status_2">Completed</string>
     <string name="status_3">Dropped</string>
 
+    <!--Edit Assessment-->
+    <string name="hint_due">Due Date</string>
+    <string name="hint_goal">Goal Date</string>
+    <string name="hint_notes">Notes</string>
+    <string name="type_1">Objective</string>
+    <string name="type_2">Performance</string>
+
     <!--List Item-->
     <string name="start">Start:</string>
     <string name="end">End:</string>

@@ -30,7 +30,8 @@
         <activity android:name=".ListTerm" />
         <activity android:name=".DetailCourse" />
         <activity android:name=".DetailAssessment" />
-        <activity android:name=".EditCourse"></activity>
+        <activity android:name=".EditCourse" />
+        <activity android:name=".EditAssessment"></activity>
     </application>
 
 </manifest>

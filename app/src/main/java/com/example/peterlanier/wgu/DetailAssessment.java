@@ -1,5 +1,6 @@
 package com.example.peterlanier.wgu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -11,6 +12,10 @@ public class DetailAssessment extends AppCompatActivity {
 
     private TextView title;
     private TextView due;
+    private TextView goal;
+    private TextView notes;
+    private TextView type;
+    private Assessment currentAssessment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +26,7 @@ public class DetailAssessment extends AppCompatActivity {
         title = (TextView) findViewById(R.id.assessment_detail_title);
         due = (TextView) findViewById(R.id.assessment_detail_due);
 
-        Assessment currentAssessment = null;
+        currentAssessment = null;
 
         Bundle b = this.getIntent().getExtras();
         if (b != null) {
@@ -46,7 +51,13 @@ public class DetailAssessment extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.navigation_edit_assessment:
-                System.out.println("edit_assessment");
+
+                Intent i = new Intent(DetailAssessment.this, EditAssessment.class);
+                Bundle b = new Bundle();
+                b.putSerializable("CURRENT_ASSESSMENT", currentAssessment);
+                i.putExtras(b);
+                startActivityForResult(i, 0);
+
                 return true;
             default:
                 System.out.println("I failed");
