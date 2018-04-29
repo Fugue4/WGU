@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/navigation_term_detail"
@@ -12,5 +13,9 @@
     <item
         android:id="@+id/navigation_new_assessment"
         android:title="@string/title_new_assessment" />
+
+    <item
+        android:id="@+id/navigation_new_note"
+        android:title="@string/title_new_note" />
 
 </menu>

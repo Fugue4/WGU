@@ -28,17 +28,24 @@
             android:label="@string/title_activity_edit_term"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ListTerm" />
-        <activity android:name=".DetailCourse" />
+        <activity android:name=".DetailCourse">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity android:name=".DetailAssessment" />
         <activity android:name=".EditCourse" />
-        <activity android:name=".EditAssessment"></activity>
+        <activity android:name=".EditAssessment" />
+
         <receiver
             android:name=".AlarmReceiver"
-            android:enabled="true" >
+            android:enabled="true">
             <intent-filter>
                 <action android:name="NOTIFICATION_SERVICE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".CourseNote"></activity>
     </application>
 
 </manifest>

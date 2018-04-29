@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +23,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-public class DetailCourse extends AppCompatActivity {
+public class DetailCourse extends AppCompatActivity implements
+    ShareActionProvider.OnShareTargetSelectedListener {
 
     private AppDatabase database;
     private TextView title;
@@ -59,6 +61,10 @@ public class DetailCourse extends AppCompatActivity {
         status = (TextView) findViewById(R.id.course_detail_status);
         setStartBtn = (Button) findViewById(R.id.btn_course_start_alarm);
         setEndBtn = (Button) findViewById(R.id.btn_course_end_alarm);
+
+//        shareIntent.setType("text/plain");
+//        shareIntent.putExtra(Intent.EXTRA_TEXT, note.toString());
+//        mShareActionProvider.setShareIntent(shareIntent);
 
         currentCourse = null;
 
@@ -162,11 +168,12 @@ public class DetailCourse extends AppCompatActivity {
 
     }
 
-
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.navigation_course, menu);
+
         return true;
     }
 
@@ -205,12 +212,27 @@ public class DetailCourse extends AppCompatActivity {
                 startActivityForResult(ii, 0);
 
                 return true;
+            case R.id.navigation_new_note:
+                Intent iiii = new Intent(DetailCourse.this, CourseNote.class);
+                Bundle bbbb = new Bundle();
+                bbbb.putSerializable("PARENT_COURSE", currentCourse);
+                iiii.putExtras(bbbb);
+                startActivityForResult(iiii, 0);
+                return true;
             default:
                 System.out.println("I failed");
                 return super.onOptionsItemSelected(item);
         }
 
+    }
 
+    @Override
+    public boolean onShareTargetSelected(ShareActionProvider source,
+                                         Intent intent) {
+        Toast.makeText(this, intent.getComponent().toString(),
+                Toast.LENGTH_LONG).show();
+
+        return(false);
     }
 
 }

@@ -12,6 +12,9 @@
     <string name="title_list_terms">All Terms</string>
     <string name="title_term_detail">Term Details</string>
     <string name="title_course_detail">Course Details</string>
+    <string name="title_return_course">Back to Course</string>
+    <string name="title_new_note">Course Notes</string>
+
 
     <!--Home Screen-->
     <string name="home_header">Android App</string>

@@ -130,9 +130,6 @@ public class DetailTerm extends AppCompatActivity {
             }
         });
 
-
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
