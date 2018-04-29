@@ -1,5 +1,7 @@
 package com.example.peterlanier.wgu;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +10,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
+import java.util.regex.Pattern;
 
 public class DetailCourse extends AppCompatActivity {
 
@@ -26,7 +33,10 @@ public class DetailCourse extends AppCompatActivity {
     private TextView mentorEmail;
     private TextView status;
     private ListView listView;
+    private Button setStartBtn;
+    private Button setEndBtn;
     private Course currentCourse;
+    private Calendar cal;
 
     public DetailCourse() throws ParseException {
     }
@@ -47,6 +57,8 @@ public class DetailCourse extends AppCompatActivity {
         mentorPhone = (TextView) findViewById(R.id.course_detail_mentor_phone);
         mentorEmail = (TextView) findViewById(R.id.course_detail_mentor_email);
         status = (TextView) findViewById(R.id.course_detail_status);
+        setStartBtn = (Button) findViewById(R.id.btn_course_start_alarm);
+        setEndBtn = (Button) findViewById(R.id.btn_course_end_alarm);
 
         currentCourse = null;
 
@@ -91,7 +103,65 @@ public class DetailCourse extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+    public void setAlert(View view){
+
+        int[] dateArray = new int[3];
+        System.out.println(view);
+        String [] dateParts;
+
+        if(view == setStartBtn){
+            dateParts = start.getText().toString().split(Pattern.quote("/"));
+            Toast.makeText(this, "Alarm set for course start",
+                    Toast.LENGTH_LONG).show();
+        } else if (view == setEndBtn) {
+            dateParts = end.getText().toString().split(Pattern.quote("/"));
+            Toast.makeText(this, "Alarm set for course end",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            dateParts = null;
+        }
+
+        for (int x = 0; x < dateParts.length; x++) {
+            dateArray[x] = Integer.parseInt(dateParts[x]);
+            System.out.println(x + " is " + dateArray[x]);
+        }
+
+        cal = Calendar.getInstance();
+//        cal.set(Calendar.MONTH, dateArray[0]);
+//        cal.set(Calendar.YEAR, dateArray[2]);
+//        cal.set(Calendar.DAY_OF_MONTH, dateArray[1]);
+//        cal.set(Calendar.MONTH, 5);
+//        cal.set(Calendar.YEAR, 2018);
+//        cal.set(Calendar.DAY_OF_MONTH, 21);
+//        cal.set(Calendar.HOUR_OF_DAY, 7);
+//        cal.set(Calendar.MINUTE, 30);
+        cal.setTimeInMillis(System.currentTimeMillis() + 3000);
+
+        Intent i = new Intent(this, AlarmReceiver.class);
+        Bundle b = new Bundle();
+        if(view == setStartBtn){
+            String message = currentCourse.title + " starts today";
+            b.putString("THE_MESSAGE", message);
+        } else if (view == setEndBtn) {
+            String message = currentCourse.title + " ends today";
+            b.putString("THE_MESSAGE", message);
+        }
+        i.putExtras(b);
+
+        Random generator = new Random();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, generator.nextInt(),
+                i, 0);
+
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+
+    }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
 

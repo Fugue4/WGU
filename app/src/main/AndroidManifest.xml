@@ -32,6 +32,13 @@
         <activity android:name=".DetailAssessment" />
         <activity android:name=".EditCourse" />
         <activity android:name=".EditAssessment"></activity>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="NOTIFICATION_SERVICE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

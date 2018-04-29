@@ -44,5 +44,7 @@
     <string name="end">End:</string>
     <string name="due">Due:</string>
 
+    <!--Edit Course-->
+    <string name="set_alarm">Set Alarm</string>
 
 </resources>
