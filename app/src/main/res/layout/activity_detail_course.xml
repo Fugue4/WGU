@@ -128,6 +128,15 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_delete_course"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/holo_red_dark"
+        android:text="DELETE COURSE" />
+
     <ListView
         android:id="@+id/assessments_list_view"
         android:layout_width="match_parent"

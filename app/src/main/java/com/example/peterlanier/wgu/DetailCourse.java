@@ -1,7 +1,9 @@
 package com.example.peterlanier.wgu;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +39,7 @@ public class DetailCourse extends AppCompatActivity implements
     private ListView listView;
     private Button setStartBtn;
     private Button setEndBtn;
+    private Button delete;
     private Course currentCourse;
     private Calendar cal;
 
@@ -61,6 +64,7 @@ public class DetailCourse extends AppCompatActivity implements
         status = (TextView) findViewById(R.id.course_detail_status);
         setStartBtn = (Button) findViewById(R.id.btn_course_start_alarm);
         setEndBtn = (Button) findViewById(R.id.btn_course_end_alarm);
+        delete = (Button) findViewById(R.id.btn_delete_course);
 
         currentCourse = null;
 
@@ -105,6 +109,42 @@ public class DetailCourse extends AppCompatActivity implements
             }
         });
 
+        //Delete Assessment
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailCourse.this);
+                alertDialogBuilder.setTitle("Delete Course?");
+                alertDialogBuilder
+                        .setMessage("Are you sure you want to delete this course? This action cannot be undone.")
+                        .setCancelable(false)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+
+                                Intent i = new Intent(DetailCourse.this, DetailTerm.class);
+                                Bundle b = new Bundle();
+                                Term currentTerm = database.termDao().getTerm(currentCourse.termId).get(0);
+                                b.putSerializable("CURRENT_TERM", currentTerm);
+                                i.putExtras(b);
+                                database.courseDao().delete(currentCourse.getId());
+                                startActivity(i);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+            }
+
+        });
+
 
 
     }
@@ -133,15 +173,12 @@ public class DetailCourse extends AppCompatActivity implements
         }
 
         cal = Calendar.getInstance();
-//        cal.set(Calendar.MONTH, dateArray[0]);
-//        cal.set(Calendar.YEAR, dateArray[2]);
-//        cal.set(Calendar.DAY_OF_MONTH, dateArray[1]);
-//        cal.set(Calendar.MONTH, 5);
-//        cal.set(Calendar.YEAR, 2018);
-//        cal.set(Calendar.DAY_OF_MONTH, 21);
-//        cal.set(Calendar.HOUR_OF_DAY, 7);
-//        cal.set(Calendar.MINUTE, 30);
-        cal.setTimeInMillis(System.currentTimeMillis() + 3000);
+        cal.set(Calendar.MONTH, dateArray[0]);
+        cal.set(Calendar.YEAR, dateArray[2]);
+        cal.set(Calendar.DAY_OF_MONTH, dateArray[1]);
+        cal.set(Calendar.HOUR_OF_DAY, 7);
+        cal.set(Calendar.MINUTE, 00);
+//        cal.setTimeInMillis(System.currentTimeMillis() + 3000);
 
         Intent i = new Intent(this, AlarmReceiver.class);
         Bundle b = new Bundle();

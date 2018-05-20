@@ -25,29 +25,11 @@ public class CourseNoteEdit extends AppCompatActivity {
             //Retrieve Course From Previous Activity
             currentCourse = (Course) b.getSerializable("CURRENT_COURSE");
 
-            if(currentCourse.note != null || !currentCourse.note.isEmpty()) {
+            if(currentCourse.note != null) {
                 note.setText(currentCourse.note);
             }
 
-//            key = Integer.toString(currentCourse.getId());
-
         }
-
-
-
-//        SharedPreferences prefs = getSharedPreferences(CourseNote.PREFS_NOTES, MODE_PRIVATE);
-//        String restoredText = prefs.getString("text", null);
-//        if (restoredText != null) {
-//            String name = prefs.getString("name", "No name defined");//"No name defined" is the default value.
-//            int idName = prefs.getInt("idName", 0); //0 is the default value.
-//        }
-
-//        // MY_PREFS_NAME - a static String variable like:
-//        //public static final String MY_PREFS_NAME = "MyPrefsFile";
-//        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-//        editor.putString("name", "Elena");
-//        editor.putInt("idName", 12);
-//        editor.apply();
 
     }
 

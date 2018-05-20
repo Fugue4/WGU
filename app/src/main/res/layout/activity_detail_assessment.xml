@@ -85,6 +85,15 @@
             android:onClick="setDate"
             android:text="@string/hint_add_goal" />
 
+        <Button
+            android:id="@+id/btn_delete_assessment"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="DELETE ASSESSMENT" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

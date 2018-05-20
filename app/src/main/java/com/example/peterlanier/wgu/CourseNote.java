@@ -1,7 +1,6 @@
 package com.example.peterlanier.wgu;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,13 +18,11 @@ public class CourseNote extends AppCompatActivity  implements
 
     private Course currentCourse;
     private TextView note;
-    private String content;
-    private String key;
+    private String message;
+    private String subject;
     private ShareActionProvider mShareActionProvider;
     private Intent shareIntent = new Intent(Intent.ACTION_SEND);
-    public static final String PREFS_NOTES = "CourseNotes";
     private Button editButton;
-//    https://github.com/commonsguy/cw-omnibus/blob/master/AppCompat/Share/app/src/main/java/com/commonsware/android/sap/MainActivity.java
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +30,11 @@ public class CourseNote extends AppCompatActivity  implements
         setContentView(R.layout.activity_course_note);
 
         note = (TextView) findViewById(R.id.note_text);
-        content = note.getText().toString();
         editButton = (Button) findViewById(R.id.btn_edit_note) ;
+        message = "No notes for course";
+        subject = "";
 
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, content);
+
 
         currentCourse = null;
 
@@ -47,30 +44,20 @@ public class CourseNote extends AppCompatActivity  implements
             currentCourse = (Course) b.getSerializable("CURRENT_COURSE");
             setTitle("Notes for " + currentCourse.title);
 
-            key = Integer.toString(currentCourse.getId());
-
             if(currentCourse.note == null || currentCourse.note.isEmpty()) {
                 note.setText("There are no notes for this course yet. Would you like to start a note?");
                 editButton.setText("Start Note");
             } else {
                 note.setText(currentCourse.note);
+                message = currentCourse.note;
+                subject = "WGU Notes for " + currentCourse.title;
             }
 
         }
 
-        SharedPreferences prefs = getSharedPreferences(PREFS_NOTES, MODE_PRIVATE);
-        String restoredText = prefs.getString("text", null);
-        if (restoredText != null) {
-            String name = prefs.getString("name", "No name defined");//"No name defined" is the default value.
-            int idName = prefs.getInt("idName", 0); //0 is the default value.
-        }
-
-//        // MY_PREFS_NAME - a static String variable like:
-//        //public static final String MY_PREFS_NAME = "MyPrefsFile";
-//        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-//        editor.putString("name", "Elena");
-//        editor.putInt("idName", 12);
-//        editor.apply();
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, message);
 
     }
 

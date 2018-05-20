@@ -1,9 +1,11 @@
 package com.example.peterlanier.wgu;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +32,7 @@ public class DetailAssessment extends AppCompatActivity {
     private Assessment currentAssessment;
     private AppDatabase database;
     private Button addGoal;
+    private Button delete;
     DatePickerDialog.OnDateSetListener addGoalListener;
     final int DATE_PICKER_GOAL = 0;
     int gYear = 2018, gMonth = 0, gDay = 1;
@@ -49,6 +52,7 @@ public class DetailAssessment extends AppCompatActivity {
         type = (TextView) findViewById(R.id.assessment_detail_type);
         goalTitle = (TextView) findViewById(R.id.assessment_detail_goal_title);
         goalTitle.setText("Set Alerts For Goal Dates");
+        delete = (Button) findViewById(R.id.btn_delete_assessment);
 
         currentAssessment = null;
 
@@ -60,20 +64,9 @@ public class DetailAssessment extends AppCompatActivity {
             title.setText(currentAssessment.title);
             due.setText(currentAssessment.due);
             type.setText(currentAssessment.type);
-
             displayGoals();
 
-//            if(!currentAssessment.goal.isEmpty()) {
-//                StringBuilder sb = new StringBuilder();
-//                for (String g : currentAssessment.goal) {
-//                    sb.append(g + "\n");
-//                }
-//                System.out.println(sb);
-//                goal.setText(sb);
-//            }
         }
-
-
 
         addGoal.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -85,10 +78,46 @@ public class DetailAssessment extends AppCompatActivity {
             public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
                 setGoalDate(arg1, arg2 + 1, arg3);
                 System.out.println("heard date picker goal");
-                //maybe try adding to goals arraylist here.
-
             }
         };
+
+
+        //Delete Assessment
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(DetailAssessment.this);
+                alertDialogBuilder.setTitle("Delete Assessment?");
+                alertDialogBuilder
+                        .setMessage("Are you sure you want to delete this Assessment? This action cannot be undone.")
+                        .setCancelable(false)
+                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+
+                                Intent i = new Intent(DetailAssessment.this, DetailCourse.class);
+                                Bundle b = new Bundle();
+                                Course currentCourse = database.courseDao().findCourseFromAssessment(currentAssessment.courseId).get(0);
+                                b.putSerializable("CURRENT_COURSE", currentCourse);
+                                i.putExtras(b);
+                                database.assessmentDao().delete(currentAssessment.getId());
+                                startActivity(i);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+
+            }
+
+        });
+
 
 
     }
@@ -141,45 +170,7 @@ public class DetailAssessment extends AppCompatActivity {
 
     public void setAlert(int year, int month, int day){
 
-//        int[] dateArray = new int[3];
-//        String[] dateParts;
-//
-//
-//
-//
-//        if(!currentAssessment.goal.isEmpty()) {
-//            StringBuilder sb = new StringBuilder();
-//            for (String g : currentAssessment.goal) {
-//                sb.append(g + "\n");
-//            }
-//            System.out.println(sb);
-//            goal.setText(sb);
-//        } else {
-//            goal.setText("No alerts set.");
-//        }
-//
-//
-//
-//
-//
-//
-//        if(view == setStartBtn){
-//            dateParts = start.getText().toString().split(Pattern.quote("/"));
-//            Toast.makeText(this, "Alarm set for course start",
-//                    Toast.LENGTH_LONG).show();
-//        } else if (view == setEndBtn) {
-//            dateParts = end.getText().toString().split(Pattern.quote("/"));
-//            Toast.makeText(this, "Alarm set for course end",
-//                    Toast.LENGTH_LONG).show();
-//        } else {
-//            dateParts = null;
-//        }
-//
-//        for (int x = 0; x < dateParts.length; x++) {
-//            dateArray[x] = Integer.parseInt(dateParts[x]);
-//            System.out.println(x + " is " + dateArray[x]);
-//        }
-        Toast.makeText(this, "New alarm set for goal date",
+        Toast.makeText(this, "Alarm set for new goal date",
                     Toast.LENGTH_LONG).show();
 
         cal = Calendar.getInstance();
