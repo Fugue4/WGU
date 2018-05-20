@@ -31,7 +31,59 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:text="Start" />
+            tools:text="Due" />
+
+        <TextView
+            android:id="@+id/assessment_detail_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:text="Assessment Type Undefined" />
+
+        <TextView
+            android:id="@+id/assessment_detail_goal_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:paddingTop="20dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:visibility="visible"
+            tools:text="Set Alerts For Goal Dates" />
+
+        <View
+            android:layout_width="175dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:background="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/assessment_detail_goal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:ellipsize="end"
+            android:maxLines="10"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:text="Goal" />
+
+        <Button
+            android:id="@+id/edit_btn_assessment_goal"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/edit_course_end"
+            android:layout_alignBottom="@id/edit_course_end"
+            android:layout_alignParentRight="true"
+            android:onClick="setDate"
+            android:text="@string/hint_add_goal" />
 
     </LinearLayout>
 

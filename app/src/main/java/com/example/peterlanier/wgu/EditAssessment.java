@@ -16,15 +16,13 @@ public class EditAssessment extends AppCompatActivity {
 
     private EditText title;
     private TextView due;
-    private TextView goal;
-    private TextView notes;
     private String assessmentType;
     private RadioButton r1, r2;
 
     private Button cancel;
     private Button save;
     private Button btn_due;
-    private Button btn_goal;
+//    private Button btn_goal;
     private Boolean update;
     private AppDatabase database;
     private Assessment updateAssessment;
@@ -48,14 +46,11 @@ public class EditAssessment extends AppCompatActivity {
 
         title = (EditText) findViewById(R.id.edit_assessment_title);
         due = (TextView) findViewById(R.id.edit_assessment_due);
-        goal = (TextView) findViewById(R.id.edit_assessment_goal);
-        notes = (EditText) findViewById(R.id.edit_assessment_notes);
         r1 = (RadioButton) findViewById(R.id.radio_type_1);
         r2 = (RadioButton) findViewById(R.id.radio_type_2);
         save = (Button) findViewById(R.id.btn_save_assessment);
         cancel = (Button) findViewById(R.id.btn_cancel_assessment);
         btn_due = (Button) findViewById(R.id.edit_btn_assessment_due);
-        btn_goal = (Button) findViewById(R.id.edit_btn_assessment_goal);
 
         c = null;
         update = false;
@@ -74,8 +69,6 @@ public class EditAssessment extends AppCompatActivity {
                 a = (Assessment) b.getSerializable("CURRENT_ASSESSMENT");
                 title.setText(a.title);
                 due.setText(a.due);
-                goal.setText(a.goal);
-                notes.setText(a.notes);
 
                 if (a.type != null) {
                     switch (a.type) {
@@ -100,11 +93,11 @@ public class EditAssessment extends AppCompatActivity {
             }
         });
 
-        btn_goal.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DATE_PICKER_END);
-            }
-        });
+//        btn_goal.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                showDialog(DATE_PICKER_END);
+//            }
+//        });
 
         from_dateListener = new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
@@ -114,18 +107,18 @@ public class EditAssessment extends AppCompatActivity {
         };
 
 
-        to_dateListener = new DatePickerDialog.OnDateSetListener() {
-            public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
-                setGoalDate(arg1, arg2 + 1, arg3);
-                System.out.println("heard date picker goal");
-            }
-        };
+//        to_dateListener = new DatePickerDialog.OnDateSetListener() {
+//            public void onDateSet(DatePicker arg0, int arg1, int arg2, int arg3) {
+//                setGoalDate(arg1, arg2 + 1, arg3);
+//                System.out.println("heard date picker goal");
+//            }
+//        };
 
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 if (a == null) {
-                    a = new Assessment(0, title.getText().toString(), due.getText().toString(), c.id);
+                    a = new Assessment(title.getText().toString(), due.getText().toString(), c.id);
                 }
                 updateAssessment = setAssessment();
 
@@ -180,11 +173,11 @@ public class EditAssessment extends AppCompatActivity {
                 .append("/").append(year));
     }
 
-    private void setGoalDate(int year, int month, int day) {
-        goal.setText(new StringBuilder().append(month)
-                .append("/").append(day)
-                .append("/").append(year));
-    }
+//    private void setGoalDate(int year, int month, int day) {
+//        goal.setText(new StringBuilder().append(month)
+//                .append("/").append(day)
+//                .append("/").append(year));
+//    }
 
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -210,8 +203,6 @@ public class EditAssessment extends AppCompatActivity {
 
         a.setTitle(title.getText().toString());
         a.setDue(due.getText().toString());
-        a.setGoal(goal.getText().toString());
-        a.setNotes(notes.getText().toString());
         a.setType(assessmentType);
 
         return a;

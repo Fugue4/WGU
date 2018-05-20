@@ -4,8 +4,10 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by peterlanier on 3/3/18.
@@ -25,16 +27,16 @@ import java.io.Serializable;
 public class Assessment implements Serializable {
 
     @PrimaryKey (autoGenerate = true)
-    final int id;
+    private int id;
     String title;
     String due;
-    String goal;
+
+    @TypeConverters(MyTypeConverters.class)
+    public ArrayList<String> goal = new ArrayList<String>();
     String type;
-    String notes;
     int courseId;
 
-    public Assessment(int id, String title, String due, int courseId) {
-        this.id = id;
+    public Assessment(String title, String due, int courseId) {
         this.title = title;
         this.due = due;
         this.courseId = courseId;
@@ -44,9 +46,7 @@ public class Assessment implements Serializable {
         return id;
     }
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public void setId(int id) { this.id = id; }
 
     public String getTitle() {
         return title;
@@ -64,7 +64,7 @@ public class Assessment implements Serializable {
         this.due = due;
     }
 
-    public String getGoal() {
+    public ArrayList<String> getGoal() {
         return goal;
     }
 
@@ -74,20 +74,20 @@ public class Assessment implements Serializable {
         return type;
     }
 
-    public void setGoal(String goal) { this.goal = goal; }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
+//    public void setGoal(ArrayList<String> goal) { this.goal = goal; }
 
     public int getCourseId() {
         return courseId;
     }
 
     public void setCourseId(int courseId) { this.courseId = courseId; }
+
+    public void addGoal(String newGoal){
+        this.goal.add(newGoal);
+    }
+
+    public void removeGoal(String removedGoal){
+        this.goal.remove(new String(removedGoal));
+    }
 
 }

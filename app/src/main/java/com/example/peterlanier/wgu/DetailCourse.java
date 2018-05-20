@@ -62,10 +62,6 @@ public class DetailCourse extends AppCompatActivity implements
         setStartBtn = (Button) findViewById(R.id.btn_course_start_alarm);
         setEndBtn = (Button) findViewById(R.id.btn_course_end_alarm);
 
-//        shareIntent.setType("text/plain");
-//        shareIntent.putExtra(Intent.EXTRA_TEXT, note.toString());
-//        mShareActionProvider.setShareIntent(shareIntent);
-
         currentCourse = null;
 
         Bundle b = this.getIntent().getExtras();
@@ -187,37 +183,37 @@ public class DetailCourse extends AppCompatActivity implements
                 List l =  database.termDao().getTerm(currentCourse.termId);
                 Term currentTerm = (Term) l.get(0);
 
-                Intent iii = new Intent(DetailCourse.this, DetailTerm.class);
-                Bundle bbb = new Bundle();
-                bbb.putSerializable("CURRENT_TERM", currentTerm);
-                iii.putExtras(bbb);
-                startActivityForResult(iii, 0);
+                Intent i1 = new Intent(DetailCourse.this, DetailTerm.class);
+                Bundle b1 = new Bundle();
+                b1.putSerializable("CURRENT_TERM", currentTerm);
+                i1.putExtras(b1);
+                startActivityForResult(i1, 0);
 
                 return true;
             case R.id.navigation_edit_course:
 
-                Intent i = new Intent(DetailCourse.this, EditCourse.class);
-                Bundle b = new Bundle();
-                b.putSerializable("CURRENT_COURSE", currentCourse);
-                i.putExtras(b);
-                startActivityForResult(i, 0);
+                Intent i2 = new Intent(DetailCourse.this, EditCourse.class);
+                Bundle b2 = new Bundle();
+                b2.putSerializable("CURRENT_COURSE", currentCourse);
+                i2.putExtras(b2);
+                startActivityForResult(i2, 0);
 
                 return true;
             case R.id.navigation_new_assessment:
 
-                Intent ii = new Intent(DetailCourse.this, EditAssessment.class);
-                Bundle bb = new Bundle();
-                bb.putSerializable("PARENT_COURSE", currentCourse);
-                ii.putExtras(bb);
-                startActivityForResult(ii, 0);
+                Intent i3 = new Intent(DetailCourse.this, EditAssessment.class);
+                Bundle b3 = new Bundle();
+                b3.putSerializable("PARENT_COURSE", currentCourse);
+                i3.putExtras(b3);
+                startActivityForResult(i3, 0);
 
                 return true;
             case R.id.navigation_new_note:
-                Intent iiii = new Intent(DetailCourse.this, CourseNote.class);
-                Bundle bbbb = new Bundle();
-                bbbb.putSerializable("PARENT_COURSE", currentCourse);
-                iiii.putExtras(bbbb);
-                startActivityForResult(iiii, 0);
+                Intent i4 = new Intent(DetailCourse.this, CourseNote.class);
+                Bundle b4 = new Bundle();
+                b4.putSerializable("CURRENT_COURSE", currentCourse);
+                i4.putExtras(b4);
+                startActivity(i4);
                 return true;
             default:
                 System.out.println("I failed");
